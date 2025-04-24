@@ -15,6 +15,7 @@ import {
   PlusCircle, Search, FileText, Download, CheckCircle, 
   Clock, AlertCircle, Calendar, User as UserIcon, Trash2
 } from "lucide-react";
+import { PdfViewer } from "@/lib/pdf-viewer";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 export default function WorkOrdersPage() {
@@ -86,8 +87,20 @@ export default function WorkOrdersPage() {
 
   const generatePdfMutation = useMutation({
     mutationFn: async (workOrderId: number) => {
-      const res = await apiRequest("POST", `/api/work-orders/${workOrderId}/generate-pdf`, {});
-      return res.json();
+      // Usar fetch diretamente em vez de apiRequest para evitar erros de parsing
+      const response = await fetch(`/api/work-orders/${workOrderId}/generate-pdf`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Erro ao gerar PDF: ${response.status}`);
+      }
+      
+      return response.json();
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["/api/work-orders"] });
@@ -95,10 +108,14 @@ export default function WorkOrdersPage() {
         title: "PDF Gerado",
         description: "O PDF da ordem de serviço foi gerado com sucesso",
       });
-      setPdfUrl(data.pdfPath);
-      setPdfDialogOpen(true);
+      
+      // Abrir o PDF usando o utilitário multiplataforma
+      if (data.pdfPath) {
+        PdfViewer.openPdf(data.pdfPath);
+      }
     },
-    onError: (error) => {
+    onError: (error: any) => {
+      console.error("Erro ao gerar PDF:", error);
       toast({
         title: "Erro",
         description: `Falha ao gerar PDF: ${error.message}`,
@@ -444,16 +461,16 @@ export default function WorkOrdersPage() {
                             <FileText className="h-4 w-4 mr-1" />
                             PDF
                           </Button>
-                          {workOrder.pdfPath && (
-                            <a 
-                              href={workOrder.pdfPath} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center h-8 px-2 text-blue-600 hover:text-blue-900"
+                          {workOrder.id && (
+                            <Button 
+                              variant="ghost" 
+                              size="sm"
+                              className="h-8 px-2 text-blue-600 hover:text-blue-900"
+                              onClick={() => PdfViewer.regenerateAndOpenPdf(workOrder.id, 'service')}
                             >
                               <Download className="h-4 w-4 mr-1" />
-                              Baixar
-                            </a>
+                              Ver PDF
+                            </Button>
                           )}
                           <Button 
                             variant="ghost" 

@@ -3,7 +3,7 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 import * as schema from "@shared/schema";
 
 // Get database connection string from environment variable
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:admin@localhost:5432/postgres';
+const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:admin@localhost:5432/sam_climatiza';
 
 // Create connection pool
 const pool = new Pool({ connectionString });

@@ -156,7 +156,7 @@ import createMemoryStore from "memorystore";
 // server/db.ts
 import { Pool } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
-var connectionString = process.env.DATABASE_URL || "postgresql://postgres:admin@localhost:5432/postgres";
+var connectionString = process.env.DATABASE_URL || "postgresql://postgres:admin@localhost:5432/sam_climatiza";
 var pool = new Pool({ connectionString });
 var originalEnd = pool.end.bind(pool);
 pool.end = async function() {
@@ -1761,7 +1761,7 @@ app.use((req, res, next) => {
   } else {
     serveStatic(app);
   }
-  const port = 5e3;
+  const port = 1e4;
   server.listen({
     port,
     host: "0.0.0.0",

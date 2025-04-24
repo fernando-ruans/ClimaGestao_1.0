@@ -12,6 +12,7 @@ import { Quote, Client, QuoteItem } from "@shared/schema";
 import { QuoteForm } from "@/components/forms/quote-form";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { PlusCircle, Search, FileText, Download, Check, X, Trash2, AlertCircle } from "lucide-react";
+import { PdfViewer } from "@/lib/pdf-viewer";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 export default function QuotesPage() {
@@ -67,8 +68,20 @@ export default function QuotesPage() {
 
   const generatePdfMutation = useMutation({
     mutationFn: async (quoteId: number) => {
-      const res = await apiRequest("POST", `/api/quotes/${quoteId}/generate-pdf`, {});
-      return res.json();
+      // Usar fetch diretamente em vez de apiRequest para evitar erros de parsing
+      const response = await fetch(`/api/quotes/${quoteId}/generate-pdf`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Erro ao gerar PDF: ${response.status}`);
+      }
+      
+      return response.json();
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["/api/quotes"] });
@@ -76,10 +89,14 @@ export default function QuotesPage() {
         title: "PDF Gerado",
         description: "O PDF do orçamento foi gerado com sucesso",
       });
-      setPdfUrl(data.pdfPath);
-      setPdfDialogOpen(true);
+      
+      // Abrir o PDF usando o utilitário multiplataforma
+      if (data.pdfPath) {
+        PdfViewer.openPdf(data.pdfPath);
+      }
     },
-    onError: (error) => {
+    onError: (error: any) => {
+      console.error("Erro ao gerar PDF:", error);
       toast({
         title: "Erro",
         description: `Falha ao gerar PDF: ${error.message}`,
@@ -379,16 +396,16 @@ export default function QuotesPage() {
                             <FileText className="h-4 w-4 mr-1" />
                             PDF
                           </Button>
-                          {quote.pdfPath && (
-                            <a 
-                              href={quote.pdfPath} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center h-8 px-2 text-blue-600 hover:text-blue-900"
+                          {quote.id && (
+                            <Button 
+                              variant="ghost" 
+                              size="sm"
+                              className="h-8 px-2 text-blue-600 hover:text-blue-900"
+                              onClick={() => PdfViewer.regenerateAndOpenPdf(quote.id, 'quote')}
                             >
                               <Download className="h-4 w-4 mr-1" />
-                              Baixar
-                            </a>
+                              Ver PDF
+                            </Button>
                           )}
                           <Button 
                             variant="ghost" 

@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: "http",
     // URL atualizada para o domínio correto
-    url: "http://10.0.0.12:10000",
+    url: "http://localhost:10000",
     cleartext: true
   },
   plugins: {

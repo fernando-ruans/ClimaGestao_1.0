@@ -277,15 +277,26 @@ export default function QuoteDetailPage() {
           </Button>
           
           {quote.pdfPath && (
-            <Button 
-              variant="default"
-              onClick={() => PdfViewer.openPdf(quote.pdfPath!)}
-              className="inline-flex items-center h-10 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-            >
-              <Download className="h-4 w-4 mr-2" />
-              Baixar PDF
-            </Button>
-          )}
+  <div className="flex gap-2">
+    <Button 
+      variant="default"
+      onClick={() => PdfViewer.openPdf(quote.pdfPath!)}
+      className="inline-flex items-center h-10 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+    >
+      <Download className="h-4 w-4 mr-2" />
+      Baixar PDF
+    </Button>
+    <Button 
+      variant="outline"
+      onClick={() => PdfViewer.regenerateAndOpenPdf(quote.id, 'quote')}
+      className="inline-flex items-center h-10 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm"
+      title="Use esta opção se o PDF não abrir corretamente"
+    >
+      <FileText className="h-4 w-4 mr-2" />
+      Abrir PDF Direto
+    </Button>
+  </div>
+)}
         </div>
       </div>
       
