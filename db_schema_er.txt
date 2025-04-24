@@ -1,0 +1,93 @@
+# Diagrama ER do Banco de Dados SAM Climatiza
+
+## Entidades e Relacionamentos
+
+[users] {0,N} --- {0,N} [work_orders] (technicians)
+[clients] {1} --- {0,N} [services]
+[clients] {1} --- {0,N} [quotes]
+[clients] {1} --- {0,N} [work_orders]
+[services] {1} --- {0,N} [service_items]
+[services] {0,1} --- {0,N} [quotes] (optional)
+[services] {1} --- {0,N} [work_orders]
+[quotes] {1} --- {0,N} [quote_items]
+
+## Entidades
+
+### users (Usuários)
+* id (PK)
+* username
+* password
+* name
+* email
+* role ('admin' ou 'technician')
+* is_active
+* photo_url
+
+### clients (Clientes)
+* id (PK)
+* name
+* contact_name
+* email
+* phone
+* address
+* city
+* state
+* zip
+* created_at
+
+### services (Serviços)
+* id (PK)
+* client_id (FK -> clients.id)
+* service_type
+* description
+* status ('pending', 'in_progress', 'completed', 'cancelled')
+* scheduled_date
+* completed_date
+* created_at
+* updated_at
+
+### service_items (Itens de Serviço)
+* id (PK)
+* service_id (FK -> services.id)
+* type ('material' ou 'labor')
+* description
+* quantity
+* unit_price (em centavos)
+* total (em centavos)
+
+### quotes (Orçamentos)
+* id (PK)
+* client_id (FK -> clients.id)
+* service_id (FK -> services.id) - opcional
+* description
+* status ('pending', 'approved', 'rejected')
+* total (em centavos)
+* valid_until
+* created_at
+* pdf_path
+
+### quote_items (Itens de Orçamento)
+* id (PK)
+* quote_id (FK -> quotes.id)
+* type ('material' ou 'labor')
+* description
+* quantity
+* unit_price (em centavos)
+* total (em centavos)
+
+### work_orders (Ordens de Serviço)
+* id (PK)
+* client_id (FK -> clients.id)
+* service_id (FK -> services.id)
+* description
+* status ('pending', 'in_progress', 'completed', 'cancelled')
+* scheduled_date
+* completed_date
+* technician_ids (Array de FK -> users.id)
+* created_at
+* pdf_path
+
+### session (Sessões)
+* sid (PK)
+* sess (JSON)
+* expire

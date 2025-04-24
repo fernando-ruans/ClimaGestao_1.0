@@ -1,0 +1,186 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "teste",
+      "password": "bcd79fce62b1e5ad6213e4b5bbb7d09d77f6d85ad6a63cb78c22709c2e888b44d9cdb68e191358505765c02c1dc93f6217870e2a8e2efb012a656ba113678e18.def2bb3eef7f6e59080319649e3ca804",
+      "name": "teste",
+      "email": "teste@email.com",
+      "role": "admin",
+      "is_active": true,
+      "photo_url": "/uploads/942e2a74-d101-4bfd-b5f9-b8f3b0c12cc3-1745285593751.jpg"
+    },
+    {
+      "id": 2,
+      "username": "Dino ",
+      "password": "55231e5fdb0311f71f0ed213807062aca6bae9091bb23b86641e246c0866c107fe29ffc912d9ebe75c1cc102b4fe5c33a48cdc16891c186162ae2b9106ffda3d.42301919d1c26b811e4dd5a4769406b6",
+      "name": "Dinossauro Silva Sauro ",
+      "email": "email@email.com",
+      "role": "technician",
+      "is_active": true,
+      "photo_url": "/uploads/b0ab30a5-f2e2-4f88-8ad5-87f8629751a1-1745285599762.jpg"
+    },
+    {
+      "id": 3,
+      "username": "Samuel",
+      "password": "56a9a8fd54013dc2798f394eb8f95e0230a16cccffc15849ccd28f14bf3a5c195463a0804405a78f2e4222c974a958e18b593ef5c0169e6b09918b30faaeb79e.233d923f421a53a3521565eed1995273",
+      "name": "Samuel Felipe ",
+      "email": "samuel@email.com",
+      "role": "technician",
+      "is_active": true,
+      "photo_url": "/uploads/f0e05e59-0a1e-4f07-94c1-044d4da956f4-1745288106058.jpg"
+    },
+    {
+      "id": 4,
+      "username": "user",
+      "password": "f8365f5f4f5d82f1adeaee51f3d5837e52d78fb5e79544d7d0a940e140c37ba8fef1f58c6dea6fa3a2517f6bd44e16bd8217a7f30676385d8429609b3bef3bfa.9a1afb405d375a2ca95bf99910a72ddd",
+      "name": "user  user ",
+      "email": "user@email.com",
+      "role": "technician",
+      "is_active": true,
+      "photo_url": null
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "name": "Dinossauro Silva Santos",
+      "contact_name": "Dino",
+      "email": "dino@sauro.com",
+      "phone": "(31) 9 9878-9898",
+      "address": "Rua da pica torta 330 - Tanque Novo",
+      "city": "Geraldina",
+      "state": "MG",
+      "zip": "125587-888",
+      "created_at": "2025-04-21T16:54:58.208989"
+    },
+    {
+      "id": 2,
+      "name": "Gustavo Lima Dias",
+      "contact_name": "Gustavo",
+      "email": "gustavo@email.com",
+      "phone": "*31) 9 5566-6676",
+      "address": "Rua Alguma coisa 567",
+      "city": "Guaraná",
+      "state": "MG",
+      "zip": "45878-000",
+      "created_at": "2025-04-21T18:28:25.656189"
+    },
+    {
+      "id": 3,
+      "name": "Raimundo Neto",
+      "contact_name": "Raimundo",
+      "email": "neto@email.com",
+      "phone": "(31)9-3352-9989",
+      "address": "Rua dos Prazeres 585 - Barra",
+      "city": "Esmeralza",
+      "state": "SP",
+      "zip": "45878-545",
+      "created_at": "2025-04-22T15:09:23.340618"
+    },
+    {
+      "id": 4,
+      "name": "Paulo Santos",
+      "contact_name": "Paulo",
+      "email": "paulo@email.com",
+      "phone": "(77) 9 9857-5454",
+      "address": "rua jose alvino 157",
+      "city": "brumado",
+      "state": "ba",
+      "zip": "46115-570",
+      "created_at": "2025-04-22T21:02:20.935784"
+    }
+  ],
+  "services": [
+    {
+      "id": 5,
+      "client_id": 2,
+      "service_type": "maintenance",
+      "description": "INSTALAÇÃO",
+      "status": "scheduled",
+      "scheduled_date": "2025-04-12",
+      "completed_date": null,
+      "created_at": "2025-04-23T03:15:31.038253",
+      "updated_at": "2025-04-23T03:15:31.038253"
+    }
+  ],
+  "service_items": [
+    {
+      "id": 7,
+      "service_id": 5,
+      "type": "labor",
+      "description": "SERVIÇO",
+      "quantity": 1,
+      "unit_price": 50000,
+      "total": 50000
+    },
+    {
+      "id": 8,
+      "service_id": 5,
+      "type": "material",
+      "description": "MATERIAIS",
+      "quantity": 1,
+      "unit_price": 15000,
+      "total": 15000
+    }
+  ],
+  "quotes": [
+    {
+      "id": 8,
+      "client_id": 2,
+      "service_id": 5,
+      "description": "INSTALAÇÃO AR CONSDICIONADO 12.000",
+      "status": "approved",
+      "total": 65000,
+      "valid_until": "2025-04-12",
+      "created_at": "2025-04-23T03:17:32.192222",
+      "pdf_path": "/pdf/quote_8_1745378253236.pdf"
+    }
+  ],
+  "quote_items": [
+    {
+      "id": 11,
+      "quote_id": 8,
+      "type": "material",
+      "description": "MATERIAIS",
+      "quantity": 1,
+      "unit_price": 15000,
+      "total": 15000
+    },
+    {
+      "id": 12,
+      "quote_id": 8,
+      "type": "labor",
+      "description": "SERVIÇO",
+      "quantity": 1,
+      "unit_price": 50000,
+      "total": 50000
+    }
+  ],
+  "work_orders": [
+    {
+      "id": 7,
+      "client_id": 2,
+      "service_id": 5,
+      "description": "INSTALAÇÃO DE CONDENSADORA EM RESIDENCIAL",
+      "status": "completed",
+      "scheduled_date": "2025-04-23",
+      "completed_date": null,
+      "technician_ids": ["3"],
+      "created_at": "2025-04-23T03:24:05.153094",
+      "pdf_path": "/pdf/workorder_7_1745378965785.pdf"
+    },
+    {
+      "id": 8,
+      "client_id": 2,
+      "service_id": 5,
+      "description": "desc",
+      "status": "completed",
+      "scheduled_date": null,
+      "completed_date": null,
+      "technician_ids": ["4"],
+      "created_at": "2025-04-23T03:29:22.585293",
+      "pdf_path": "/pdf/workorder_8_1745378991569.pdf"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SAM CLIMATIZA</string>
+    <string name="title_activity_main">SAM CLIMATIZA</string>
+    <string name="package_name">com.samclimatiza.app</string>
+    <string name="custom_url_scheme">com.samclimatiza.app</string>
+</resources>

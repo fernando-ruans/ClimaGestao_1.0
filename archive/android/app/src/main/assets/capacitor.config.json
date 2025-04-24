@@ -1,0 +1,8 @@
+{
+	"appId": "com.samclimatiza.app",
+	"appName": "SAM CLIMATIZA",
+	"webDir": "dist/public",
+	"server": {
+		"androidScheme": "https"
+	}
+}

@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --foreground: 222.2 84% 4.9%;  /* Muito escuro para texto normal */
+    --muted-foreground: 215.4 16.3% 25%; /* Cinza escuro para textos secundários */
+    --card-foreground: 222.2 84% 4.9%; /* Escuro para texto em cartões */
+    --popover-foreground: 222.2 84% 4.9%; /* Escuro para texto em popovers */
+    --primary-foreground: 210 40% 98%; /* Branco para texto em fundos primários */
+    --secondary-foreground: 222.2 47.4% 11.2%; /* Escuro para texto em fundos secundários */
+    --destructive-foreground: 210 40% 98%; /* Branco para texto em fundos destrutivos */
+    --accent-foreground: 222.2 47.4% 11.2%; /* Escuro para texto em fundos accent */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  /* Garantir que todos os textos em componentes comuns sejam escuros */
+  p, h1, h2, h3, h4, h5, h6, span, div, button, a, label, input, textarea, select {
+    color: hsl(222.2 84% 4.9%);
+  }
+  
+  /* Exceção para menu mobile e sidebar */
+  .bg-gradient-to-r a, .bg-gradient-to-r span, 
+  .bg-gradient-to-r div, .bg-gradient-to-r button,
+  .bg-gradient-to-b a, .bg-gradient-to-b span, 
+  .bg-gradient-to-b div, .bg-gradient-to-b button,
+  .bg-blue-800 *, .bg-red-800 *, 
+  .from-blue-700 *, .from-blue-800 *, .from-blue-900 *,
+  .to-blue-900 *, .to-red-900 *, .from-red-600 *, .to-red-700 *,
+  .text-white {
+    color: white !important;
+  }
+
+  /* Manter texto em botões primários com boa visibilidade */
+  .btn-primary, button[data-variant="primary"], [data-variant="primary"], 
+  button.bg-primary, .bg-primary[role="button"], .bg-primary button,
+  [class*="primary-"] button, button[class*="primary-"] {
+    color: hsl(210 40% 98%) !important;
+  }
+
+  /* Manter texto em componentes destrutivos com boa visibilidade */
+  .btn-destructive, button[data-variant="destructive"], [data-variant="destructive"],
+  button.bg-destructive, .bg-destructive[role="button"], .bg-destructive button,
+  [class*="destructive-"] button, button[class*="destructive-"] {
+    color: hsl(210 40% 98%) !important;
+  }
+
+  /* Garantir que todos os inputs tenham texto escuro */
+  input, textarea, select {
+    color: hsl(222.2 84% 4.9%) !important;
+  }
+
+  /* Textos em tabelas também devem ser escuros */
+  table td, table th {
+    color: hsl(222.2 84% 4.9%);
+  }
+
+  /* Texto em dropdowns e menus devem ser escuros */
+  .dropdown-content, .menu-content, [role="menu"], [role="listbox"] {
+    color: hsl(222.2 84% 4.9%);
+  }
+
+  /* Estilos específicos para componentes shadcn */
+  .text-muted-foreground {
+    color: hsl(215.4 16.3% 25%) !important;
+  }
+
+  .text-card-foreground, .text-popover-foreground {
+    color: hsl(222.2 84% 4.9%) !important;
+  }
+  
+  /* Corrigir cores para links */
+  a.text-primary, .text-primary {
+    color: hsl(214.3 100% 48.6%) !important;
+  }
+  
+  /* Cores para texto em cartões */
+  .card *, .card-header *, .card-footer *, .card-title, .card-description {
+    color: hsl(222.2 84% 4.9%) !important;
+  }
+  
+  /* Exceção para botões dentro de cartões */
+  .card button[class*="primary"], .card [class*="destructive"], 
+  .card .bg-primary *, .card .bg-destructive * {
+    color: hsl(210 40% 98%) !important;
+  }
+}
